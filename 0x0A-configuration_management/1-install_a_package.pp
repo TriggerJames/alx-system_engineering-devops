@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # A puppet manifest installing flask v2.1.0 
 
 package { 'flask':
