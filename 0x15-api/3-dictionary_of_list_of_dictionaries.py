@@ -3,8 +3,8 @@
 """python script to fetch Rest API for todo lists of employees"""
 
 import json
-import sys
 import requests
+import sys
 
 if __name__ == '__main__':
     url = "https://jsonplaceholder.typicode.com/users"
