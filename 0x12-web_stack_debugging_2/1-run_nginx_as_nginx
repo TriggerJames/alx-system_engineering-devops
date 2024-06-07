@@ -1,7 +1,23 @@
 #!/usr/bin/env bash
-# Update Nginx configuration to ensure it runs as nginx user
+# Define the nginx configuration file
 NGINX_CONF='/etc/nginx/nginx.conf'
+
+echo "Updating Nginx configuration..."
+
+# Set the user to nginx
 sed -i 's/user www-data;/user nginx;/g' $NGINX_CONF
+
+# Change the listen directive to listen on all IPs on port 8080
 sed -i 's/listen 80 default_server;/listen 0.0.0.0:8080;/g' $NGINX_CONF
-nginx -t && nginx -s reload
+
+# Test Nginx configuration
+nginx -t
+if [ $? -ne 0 ]; then
+    echo "Nginx configuration test failed. Exiting."
+    exit 1
+fi
+
+echo "Nginx configuration test passed. Reloading Nginx..."
+nginx -s reload
+
 echo "Nginx has been configured to run as nginx user and listen on 0.0.0.0:8080"
