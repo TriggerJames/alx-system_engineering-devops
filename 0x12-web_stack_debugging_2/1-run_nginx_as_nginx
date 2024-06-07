@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Update Nginx configuration to ensure it runs as nginx user
 NGINX_CONF='/etc/nginx/nginx.conf'
