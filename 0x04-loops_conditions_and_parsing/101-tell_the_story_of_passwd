@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# seven fields from /etc/passwd stored in $f1,f2...,$f7
+# $1 is the file to read from
+# $2 is the file to write to
+# $3 is the number of lines to read
+# $4 is the number of lines to write
+# $5 is the number of fields to write
+# $6 is the field to write
+# $7 is the value to write
+
+file="/etc/passwd"
+
+while IFS= read -r line; do
+  user=$(echo "$line" | cut -d ':' -f1)
+  gid=$(echo "$line" | cut -d ':' -f4)
+  dir=$(echo "$line" | cut -d ':' -f6)
+  shell=$(echo "$line" | cut -d ':' -f7)
+  uid=$(echo "$line" | cut -d ':' -f3)
+  pass=$(echo "$line" | cut -d ':' -f2)
+  info=$(echo "$line" | cut -d ':' -f5)
+
+  echo "The user $user is part of the $gid gang, lives in $dir and rides $shell. $uid's place is protected by the passcode $pass, more info about the user here: $info"
+done < "$file"
