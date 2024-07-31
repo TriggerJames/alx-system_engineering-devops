@@ -7,7 +7,6 @@
 # $5 is the number of fields to write
 # $6 is the field to write
 # $7 is the value to write
-
 file="/etc/passwd"
 
 while IFS= read -r line; do
