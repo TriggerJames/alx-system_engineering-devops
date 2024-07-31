@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # seven fields from /etc/passwd stored in $f1,f2...,$f7
 # $1 is the file to read from
 # $2 is the file to write to
