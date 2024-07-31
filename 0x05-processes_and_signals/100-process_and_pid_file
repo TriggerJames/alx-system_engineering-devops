@@ -1,18 +1,23 @@
 #!/usr/bin/env bash
-# Bash script that:
-# Displays To infinity and beyond indefinitely
-# Displays I hate the kill command when receiving a SIGTERM signal
-# Displays Y U no love me?! when receiving a SIGINT signal
+# Process and PID file
+
+file="/var/run/myscript.pid"
+
+if [ ! -e "$file" ]; then
+  touch "$file"
+fi
+
+sleep 2 &
+
+echo "$!" > "$file"
+
 # prints I hate the kill command, deletes the file and exits  when receiving a SIGTERM or SIGQUIT signal
+trap 'echo "I hate the kill command"; rm "$file"; exit' SIGTERM SIGQUIT
 
+# prints Y U no love me?! when receiving a SIGINT signal
+trap "echo Y U no love me?!" SIGINT
 
-sudo touch /var/run/holbertonscript.pid
-sudo bash -c 'echo $$ > /var/run/holbertonscript.pid'
-while true
-do
-    echo "To infinity and beyond"
-    sleep 2
-    trap 'echo "I hate the kill command"; sudo rm /var/run/holbertonscript.pid; exit' SIGTERM
-    trap 'echo "Y U no love me?!"' SIGINT
-    trap 'sudo rm /var/run/holbertonscript.pid; exit' SIGQUIT
+while true; do
+  echo "To infinity and beyond"
+  sleep 2
 done
